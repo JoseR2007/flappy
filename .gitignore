@@ -1,0 +1,11 @@
+# archivos del editor
+.idea/*
+.vscode/*
+
+# generados automaticamente
+./build/*
+./core/build/*
+./bin/*
+./out/*
+./gradle/*
+
