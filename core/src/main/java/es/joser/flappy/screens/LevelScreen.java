@@ -13,7 +13,6 @@ import es.joser.flappy.models.Pipeline;
 import es.joser.flappy.models.Player;
 
 import java.awt.*;
-import java.nio.channels.Pipe;
 import java.util.ArrayList;
 
 public class LevelScreen extends ScreenAdapter {
