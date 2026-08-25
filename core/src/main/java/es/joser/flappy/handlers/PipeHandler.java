@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import es.joser.flappy.models.Pipeline;
 
+import java.io.PipedInputStream;
+
 public class PipeHandler {
     private Array<Pipeline> pipes;
     private SpriteBatch batch;
@@ -22,20 +24,24 @@ public class PipeHandler {
     public PipeHandler(SpriteBatch batch) {
         this.pipes = new Array<Pipeline>();
         this.batch = batch;
+
+        this.createPipes();
     }
 
     // managment:
-    private Pipeline generatePipe() {
+    private Pipeline generatePipe(float ultimateX) {
         int height = (int) (Math.random() * rangeHeightPipe) + minHeightPipe;
         Pixmap pix = new Pixmap(20, height, Pixmap.Format.RGBA8888);
         pix.setColor(Color.YELLOW);
         pix.fill();
 
-        return new Pipeline(new TextureRegion(new Texture(pix)));
+        return new Pipeline(new TextureRegion(new Texture(pix)), ultimateX + distanceBetweenPipes);
     }
 
     public void updatePipes(float delta) {
-        for (Pipeline pipe : this.pipes) {
+        Pipeline pipe = null;
+        for (int ind = 0; ind < this.pipes.size; ind++) {
+            pipe = this.pipes.get(ind);
             if (pipe.isOffScreen())
                 this.reusePipe(pipe);
             else
@@ -44,8 +50,12 @@ public class PipeHandler {
     }
 
     public void createPipes() {
-        for (int ind = 0; ind < cantPipes; ind++)
-            this.pipes.add(this.generatePipe());
+        float ultimateX = PipeHandler.initialPosPipes;
+
+        for (int ind = 0; ind < cantPipes; ind++) {
+            ultimateX = PipeHandler.initialPosPipes * (ind + 1);
+            this.pipes.add(this.generatePipe(ultimateX));
+        }
     }
 
     public void drawPipes() {
@@ -54,8 +64,23 @@ public class PipeHandler {
     }
 
     public void reusePipe(Pipeline pipe) {
-        pipe.setX(PipeHandler.initialPosPipes);
+        float max = this.getMaxPosX();
+
+        pipe.setPosx(max + PipeHandler.distanceBetweenPipes);
         int height = (int) (Math.random() * rangeHeightPipe) + minHeightPipe;
-        pipe.setRegionHeight(height);
+        pipe.setSize(20, height);
+    }
+
+    public float getMaxPosX() {
+        float result = this.pipes.get(0).getPosX();
+
+        Pipeline pipe = null;
+        for (int ind = 0; ind < this.pipes.size; ind++) {
+            pipe = this.pipes.get(ind);
+            if (pipe.getPosX() > result)
+                result = pipe.getPosX();
+        }
+
+        return result;
     }
 }

@@ -8,15 +8,21 @@ import com.badlogic.gdx.math.Rectangle;
 public class Pipeline extends Sprite {
     private Rectangle box;
     private float posX;
-    private float posY;
 
     private static final float velocity = 5f;
 
-    public Pipeline (TextureRegion sprite) {
+    public Pipeline (TextureRegion sprite, float initPosX) {
         super(sprite);
-        this.posX = 0;
-        this.posY = 0;
-        this.box = new Rectangle(this.posX, this.posY, this.getWidth(), this.getHeight());
+        this.posX = initPosX;
+        this.box = new Rectangle(this.posX, 0, this.getWidth(), this.getHeight());
+    }
+
+    public void setPosx(float posx) {
+        this.posX = posx;
+    }
+
+    public float getPosX() {
+        return this.posX;
     }
 
     public void update(float delta) {
@@ -29,9 +35,6 @@ public class Pipeline extends Sprite {
     }
 
     public boolean isOffScreen() {
-        boolean result = false;
-        if ((this.getWidth() + this.getX()) < 0)
-            result = true;
-        return result;
+        return (this.getWidth() + this.getPosX()) < 0;
     }
 }

@@ -3,9 +3,9 @@
 .vscode/*
 
 # generados automaticamente
-./build/*
-./core/build/*
-./bin/*
-./out/*
-./gradle/*
+build/*
+core/build/*
+bin/*
+out/*
+gradle/*
 
