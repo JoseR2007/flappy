@@ -20,11 +20,18 @@ public class Pipeline extends Sprite {
     }
 
     public void update(float delta) {
-        this.posX += (velocity * delta);
+        this.posX -= (velocity * delta);
         this.setX(this.posX);
     }
 
     public void render(SpriteBatch batch) {
         this.draw(batch);
+    }
+
+    public boolean isOffScreen() {
+        boolean result = false;
+        if ((this.getWidth() + this.getX()) < 0)
+            result = true;
+        return result;
     }
 }
