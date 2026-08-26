@@ -5,9 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Player extends Sprite {
-    private Animation<TextureRegion> animation;
-    private TextureRegion[] sprites;
-    private float stateTime;
     private int score;
     private float currentVelocity;
 
@@ -15,21 +12,14 @@ public class Player extends Sprite {
     private static final float verticalAccelation = 18.6f;
     private static final float timeJumping = 2f;
 
-    public Player(TextureRegion[] sprites, int initialSprite, float timingSpriteAnimation) {
-        super(sprites[initialSprite]);
-        this.sprites = sprites;
-        this.animation = new Animation<TextureRegion>(timingSpriteAnimation, sprites);
+    public Player(TextureRegion sprite) {
+        super(sprite);
 
-        this.stateTime = 0f;
         this.score = 0;
         this.currentVelocity = 0f;
     }
 
     /* Getters */
-    public float getStateTime() {
-        return this.stateTime;
-    }
-
     public int getScore() {
         return this.score;
     }
