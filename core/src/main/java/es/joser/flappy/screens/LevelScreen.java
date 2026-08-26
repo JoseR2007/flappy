@@ -3,6 +3,7 @@ package es.joser.flappy.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import es.joser.flappy.handlers.PipeHandler;
@@ -32,8 +33,10 @@ public class LevelScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        this.batch.setProjectionMatrix(this.cam.combined);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         this.pipes.updatePipes(delta);
+        this.batch.setProjectionMatrix(this.cam.combined);
 
         this.batch.begin();
         this.pipes.drawPipes();
@@ -42,6 +45,7 @@ public class LevelScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        this.batch.dispose();
         super.dispose();
     }
 }

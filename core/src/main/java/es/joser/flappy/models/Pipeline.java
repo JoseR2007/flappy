@@ -9,16 +9,18 @@ public class Pipeline extends Sprite {
     private Rectangle box;
     private float posX;
 
-    private static final float velocity = 5f;
+    private static final float velocity = 20f;
 
     public Pipeline (TextureRegion sprite, float initPosX) {
         super(sprite);
         this.posX = initPosX;
+        this.setPosition(this.posX, 0);
         this.box = new Rectangle(this.posX, 0, this.getWidth(), this.getHeight());
     }
 
     public void setPosx(float posx) {
         this.posX = posx;
+        this.setPosition(this.posX, 0);
     }
 
     public float getPosX() {
@@ -27,7 +29,7 @@ public class Pipeline extends Sprite {
 
     public void update(float delta) {
         this.posX -= (velocity * delta);
-        this.setX(this.posX);
+        this.setPosition(this.posX, 0);
     }
 
     public void render(SpriteBatch batch) {
