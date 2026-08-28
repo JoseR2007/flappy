@@ -27,7 +27,7 @@ public class LevelScreen extends ScreenAdapter {
         this.cam.setToOrtho(false);
         this.batch = new SpriteBatch();
 
-        this.player = new Player(SpriteManager.getInstance().getSpritePlayer(), Gdx.graphics.getHeight());
+        this.player = new Player(SpriteManager.getInstance().generateSpriteTestPlayer(), Gdx.graphics.getHeight());
         this.controller = new VirtualController();
         this.inputPlayer = new InputPlayer(this.controller);
         this.pipes = new PipeHandler(this.batch);

@@ -13,17 +13,20 @@ public class SpriteManager {
     private TextureRegion background;
 
     public SpriteManager() {
-        Pixmap pixPlaye = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
-        pixPlaye.setColor(Color.RED);
-        pixPlaye.fill();
-
-        this.spritePlayer = new TextureRegion(new Texture(pixPlaye));
     }
 
     public static SpriteManager getInstance() {
         if (instance == null)
             instance = new SpriteManager();
         return instance;
+    }
+
+    public TextureRegion generateSpriteTestPlayer() {
+        Pixmap pixPlayer = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
+        pixPlayer.setColor(Color.RED);
+        pixPlayer.fill();
+
+        return new TextureRegion(new Texture(pixPlayer));
     }
 
     public TextureRegion generateSpritePipe(int height) {
