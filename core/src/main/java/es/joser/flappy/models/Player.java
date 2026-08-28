@@ -32,7 +32,7 @@ public class Player extends Sprite {
     }
 
     public void jump() {
-        this.currentVelocity = jumpImpulse; // no depende de delta ni de frames
+        this.currentVelocity = jumpImpulse;
     }
 
     public void update(float delta) {

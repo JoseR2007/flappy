@@ -26,6 +26,14 @@ public class SpriteManager {
         return instance;
     }
 
+    public TextureRegion generateSpritePipe(int height) {
+        Pixmap pix = new Pixmap(20, (int) height, Pixmap.Format.RGBA8888);
+        pix.setColor(Color.YELLOW);
+        pix.fill();
+
+        return new TextureRegion(new Texture(pix));
+    }
+
     public TextureRegion getSpritePlayer() {
         return this.spritePlayer;
     }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import es.joser.flappy.SpriteManager;
 import es.joser.flappy.models.Pipeline;
 
 import java.io.PipedInputStream;
@@ -31,11 +32,7 @@ public class PipeHandler {
     // managment:
     private Pipeline generatePipe(float ultimateX) {
         int height = (int) (Math.random() * rangeHeightPipe) + minHeightPipe;
-        Pixmap pix = new Pixmap(20, height, Pixmap.Format.RGBA8888);
-        pix.setColor(Color.YELLOW);
-        pix.fill();
-
-        return new Pipeline(new TextureRegion(new Texture(pix)), ultimateX + distanceBetweenPipes);
+        return new Pipeline(SpriteManager.getInstance().generateSpritePipe(height), ultimateX + distanceBetweenPipes);
     }
 
     public void updatePipes(float delta) {
