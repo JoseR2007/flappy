@@ -2,6 +2,7 @@ package es.joser.flappy.handlers;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import es.joser.flappy.models.Player;
 
 public class InputPlayer implements InputProcessor {
     private VirtualController controller;

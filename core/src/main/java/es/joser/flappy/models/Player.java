@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Player extends Sprite {
     private int score;
     private float currentVelocity;
+    private float limitTop;
 
     private static final float gravity = 9.81f;
-    private static final float verticalAccelation = 18.6f;
-    private static final float timeJumping = 2f;
+    private static final float jumpImpulse = 12f;
 
-    public Player(TextureRegion sprite) {
+    public Player(TextureRegion sprite, float viewportHeight) {
         super(sprite);
 
+        this.setPosition(20, 20);
+        this.limitTop = viewportHeight - 10;
         this.score = 0;
         this.currentVelocity = 0f;
     }
@@ -29,17 +31,22 @@ public class Player extends Sprite {
         return this.score;
     }
 
-    public void update(float delta, boolean isFalling) {
-        float posY = this.getY(), velocity = this.currentVelocity;
+    public void jump() {
+        this.currentVelocity = jumpImpulse; // no depende de delta ni de frames
+    }
 
-        if (isFalling) {
-            posY = (float) (this.getY() + this.currentVelocity*(delta) - 0.5*gravity*(delta*delta));
-            velocity = this.currentVelocity - gravity*(delta);
-        } else {
-            posY = (float) (this.getY() + this.currentVelocity*(delta) + 0.5*(verticalAccelation - gravity)*(delta*delta));
-            velocity = this.getY() + (verticalAccelation - gravity)*(delta);
+    public void update(float delta) {
+        float posY = this.getY()
+            + this.currentVelocity * delta
+            - 0.5f * gravity * delta * delta;
+
+        this.currentVelocity -= gravity * delta;
+
+        if (posY >= this.limitTop) {
+            posY = this.limitTop - 1;
+            this.currentVelocity = 0f;
         }
-        this.setY(posY);
-        this.currentVelocity = velocity;
+
+        this.setPosition(20, posY);
     }
 }
