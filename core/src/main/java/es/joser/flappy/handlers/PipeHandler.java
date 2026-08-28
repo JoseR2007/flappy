@@ -1,15 +1,9 @@
 package es.joser.flappy.handlers;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import es.joser.flappy.SpriteManager;
 import es.joser.flappy.models.Pipeline;
-
-import java.io.PipedInputStream;
 
 public class PipeHandler {
     private Array<Pipeline> pipes;
