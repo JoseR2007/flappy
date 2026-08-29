@@ -14,7 +14,6 @@ public class InputPlayer implements InputProcessor {
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.SPACE) {
             this.controller.setFalling(false);
-            this.controller.setJump(true);
             return true;
         }
         return false;
@@ -24,7 +23,6 @@ public class InputPlayer implements InputProcessor {
     public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.SPACE) {
             this.controller.setFalling(true);
-            this.controller.setJump(false);
             return true;
         }
         return false;
