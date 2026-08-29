@@ -18,9 +18,15 @@ public class Pipeline extends Sprite {
         this.box = new Rectangle(this.posX, 0, this.getWidth(), this.getHeight());
     }
 
+    public Rectangle getBox() {
+        return this.box;
+    }
+
     public void setPosx(float posx) {
         this.posX = posx;
+
         this.setPosition(this.posX, 0);
+        this.box.setX(this.posX);
     }
 
     public float getPosX() {
@@ -29,7 +35,9 @@ public class Pipeline extends Sprite {
 
     public void update(float delta) {
         this.posX -= (velocity * delta);
+
         this.setPosition(this.posX, 0);
+        this.box.setX(this.posX);
     }
 
     public void render(SpriteBatch batch) {

@@ -44,6 +44,7 @@ public class LevelScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.processInput();
         this.player.update(delta);
+        this.pipes.checkColision(this.player.getBoundingRectangle());
 
         this.pipes.updatePipes(delta);
         this.batch.setProjectionMatrix(this.cam.combined);

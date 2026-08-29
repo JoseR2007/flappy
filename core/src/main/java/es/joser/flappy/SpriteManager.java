@@ -5,12 +5,18 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import javax.swing.*;
+
 public class SpriteManager {
     private static SpriteManager instance;
 
     private TextureRegion spritePlayer;
     private TextureRegion spritePipeline;
     private TextureRegion background;
+
+    public static final int widthPipe = 40;
+    public static final int playerWidth = 30;
+    public static final int playerHeight = 30;
 
     public SpriteManager() {
     }
@@ -22,7 +28,7 @@ public class SpriteManager {
     }
 
     public TextureRegion generateSpriteTestPlayer() {
-        Pixmap pixPlayer = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
+        Pixmap pixPlayer = new Pixmap(SpriteManager.playerWidth, SpriteManager.playerHeight, Pixmap.Format.RGBA8888);
         pixPlayer.setColor(Color.RED);
         pixPlayer.fill();
 
@@ -30,7 +36,7 @@ public class SpriteManager {
     }
 
     public TextureRegion generateSpritePipe(int height) {
-        Pixmap pix = new Pixmap(20, (int) height, Pixmap.Format.RGBA8888);
+        Pixmap pix = new Pixmap(SpriteManager.widthPipe, (int) height, Pixmap.Format.RGBA8888);
         pix.setColor(Color.YELLOW);
         pix.fill();
 

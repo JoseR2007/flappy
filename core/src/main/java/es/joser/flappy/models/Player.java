@@ -8,14 +8,14 @@ public class Player extends Sprite {
     private float currentVelocity;
     private float limitTop;
 
-    private static final float gravity = 9.81f;
-    private static final float jumpImpulse = 12f;
+    private static final float gravity = 40f;
+    private static final float jumpImpulse = 25f;
 
     public Player(TextureRegion sprite, float viewportHeight) {
         super(sprite);
 
         this.setPosition(20, 20);
-        this.limitTop = viewportHeight - 10;
+        this.limitTop = viewportHeight - sprite.getRegionHeight();
         this.score = 0;
         this.currentVelocity = 0f;
     }
@@ -43,6 +43,9 @@ public class Player extends Sprite {
 
         if (posY >= this.limitTop) {
             posY = this.limitTop - 1;
+            this.currentVelocity = 0f;
+        } else if (posY <= 0) {
+            posY = 0;
             this.currentVelocity = 0f;
         }
 

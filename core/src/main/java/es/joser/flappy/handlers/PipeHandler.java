@@ -1,6 +1,7 @@
 package es.joser.flappy.handlers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import es.joser.flappy.SpriteManager;
 import es.joser.flappy.models.Pipeline;
@@ -11,10 +12,10 @@ public class PipeHandler {
 
     public static final float initialPosPipes = 30f;
     private static final int cantPipes = 5;
-    private static final int minHeightPipe = 20;
-    private static final int maxHeightPipe = 50;
+    private static final int minHeightPipe = 110;
+    private static final int maxHeightPipe = 150;
     private static final int rangeHeightPipe = (maxHeightPipe - minHeightPipe) + 1;
-    private static final float distanceBetweenPipes = 30f;
+    private static final float distanceBetweenPipes = 90f;
 
     public PipeHandler(SpriteBatch batch) {
         this.pipes = new Array<Pipeline>();
@@ -41,10 +42,10 @@ public class PipeHandler {
     }
 
     public void createPipes() {
-        float ultimateX = PipeHandler.initialPosPipes;
+        float ultimateX = distanceBetweenPipes;
 
         for (int ind = 0; ind < cantPipes; ind++) {
-            ultimateX = PipeHandler.initialPosPipes * (ind + 1);
+            ultimateX = PipeHandler.distanceBetweenPipes * (ind + 1);
             this.pipes.add(this.generatePipe(ultimateX));
         }
     }
@@ -59,7 +60,7 @@ public class PipeHandler {
 
         pipe.setPosx(max + PipeHandler.distanceBetweenPipes);
         int height = (int) (Math.random() * rangeHeightPipe) + minHeightPipe;
-        pipe.setSize(20, height);
+        pipe.setSize(SpriteManager.widthPipe, height);
     }
 
     public float getMaxPosX() {
@@ -71,7 +72,20 @@ public class PipeHandler {
             if (pipe.getPosX() > result)
                 result = pipe.getPosX();
         }
+        return result;
+    }
 
+    public boolean checkColision(Rectangle boxPlayer) {
+        Pipeline pipe = null;
+        boolean result = false;
+
+        for (int ind = 0; ind < this.pipes.size; ind++) {
+            pipe = this.pipes.get(ind);
+            if (boxPlayer.overlaps(pipe.getBox()))
+                result = true;
+        }
+
+        System.out.println(result);
         return result;
     }
 }
